@@ -1,0 +1,22 @@
+name: "Protos-Windows Test"
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  tests:
+    runs-on: windows-latest
+    steps:
+      - name: Install Ruby 2.7
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "2.7"
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Run test
+        shell: bash
+        run: |
+          bundle install && bundle exec ruby protos-windows.rb
