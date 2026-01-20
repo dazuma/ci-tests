@@ -1,0 +1,19 @@
+name: "Test for triggers"
+
+on:
+  pull_request:
+    types: [closed, opened, reopened, synchronize, edited, ready_for_review]
+    paths: &path_filters
+      - ".github/workflows/triggers.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  release-process-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show stuff
+        run: |
+          echo "EVENT ACTION IS ${{ github.event.action }}"
+          echo "PR STATE IS ${{ github.event.pull_request.state }}"
